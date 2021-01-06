@@ -1,0 +1,37 @@
+﻿@model GlobalGames.Dados.Entidades.OrcamentoPedido
+
+@{
+    ViewData["Title"] = "Details";
+}
+
+
+<div class="container">
+    <h2>Detalhes do Pedido</h2>
+    <h4>Orçamento</h4>
+    <hr />
+    <dl class="table" >
+        <dt>
+            @Html.DisplayNameFor(model => model.Nome)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Nome)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Email)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Email)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Mensagem)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Mensagem)
+        </dd>
+    </dl>
+    <div>
+        <a class="button_1" asp-action="Index">Back to List</a>
+    </div>
+</div>
+
+

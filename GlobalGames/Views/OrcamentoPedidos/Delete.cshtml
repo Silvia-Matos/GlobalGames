@@ -1,0 +1,41 @@
+﻿@model GlobalGames.Dados.Entidades.OrcamentoPedido
+
+@{
+    ViewData["Title"] = "Delete";
+}
+
+
+
+<div class="container">
+    <h2>Apagar Pedido</h2>
+    <h3>Tens acerteza que queres apagar?</h3>
+    <h4>Orçamento</h4>
+    <hr />
+    <dl class="table">
+        <dt>
+            @Html.DisplayNameFor(model => model.Nome)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Nome)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Email)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Email)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Mensagem)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Mensagem)
+        </dd>
+    </dl>
+
+    <form asp-action="Delete">
+        <input type="hidden" asp-for="Id" />
+        <input type="submit" value="Delete" class="button_1" />
+        <a class="button_1" asp-action="Index">Back to List</a>
+    </form>
+</div>
+
