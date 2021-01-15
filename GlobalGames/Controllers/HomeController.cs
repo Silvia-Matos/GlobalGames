@@ -1,13 +1,10 @@
-﻿using GlobalGames.Models;
-using Microsoft.AspNetCore.Mvc;
-using System;
-using System.Collections.Generic;
-using System.Diagnostics;
-using System.Linq;
-using System.Threading.Tasks;
-
-namespace GlobalGames.Controllers
+﻿namespace GlobalGames.Controllers
 {
+    using System.Diagnostics;
+    using Models;
+    using Microsoft.AspNetCore.Mvc;
+    
+
     public class HomeController : Controller
     {
         public IActionResult Index()
@@ -19,6 +16,11 @@ namespace GlobalGames.Controllers
         {
             ViewData["Message"] = "Your application description page.";
 
+            return View();
+        }
+
+        public IActionResult Inscricao()
+        {
             return View();
         }
 
@@ -39,5 +41,6 @@ namespace GlobalGames.Controllers
         {
             return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
         }
+
     }
 }

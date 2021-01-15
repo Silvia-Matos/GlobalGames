@@ -1,12 +1,16 @@
-﻿using GlobalGames.Dados.Entidades;
-using Microsoft.EntityFrameworkCore;
+﻿namespace GlobalGames.Dados
+{  
+    using Entidades;
+    using Microsoft.EntityFrameworkCore;
 
-namespace GlobalGames.Dados
-{
     public class DataContext : DbContext
     {
 
         public DbSet<OrcamentoPedido> PedidosOrcamento { get; set; }
+
+
+
+        public DbSet<JogoInscricao> InscricoesJogo { get; set; }
 
 
 

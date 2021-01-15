@@ -7,22 +7,22 @@
     using Microsoft.AspNetCore.Mvc;
     using Microsoft.EntityFrameworkCore;
     
-    public class OrcamentoPedidosController : Controller
+    public class JogoInscricoesController : Controller
     {
         private readonly DataContext _context;
 
-        public OrcamentoPedidosController(DataContext context)
+        public JogoInscricoesController(DataContext context)
         {
             _context = context;
         }
 
-        // GET: OrcamentoPedidos
+        // GET: JogoInscricoes
         public async Task<IActionResult> Index()
         {
-            return View(await _context.PedidosOrcamento.ToListAsync());
+            return View(await _context.InscricoesJogo.ToListAsync());
         }
 
-        // GET: OrcamentoPedidos/Details/5
+        // GET: JogoInscricoes/Details/5
         public async Task<IActionResult> Details(int? id)
         {
             if (id == null)
@@ -30,36 +30,39 @@
                 return NotFound();
             }
 
-            var orcamentoPedido = await _context.PedidosOrcamento
+            var jogoInscricao = await _context.InscricoesJogo
                 .FirstOrDefaultAsync(m => m.Id == id);
-            if (orcamentoPedido == null)
+            if (jogoInscricao == null)
             {
                 return NotFound();
             }
 
-            return View(orcamentoPedido);
+            return View(jogoInscricao);
         }
 
-        // GET: OrcamentoPedidos/Create
 
 
-        // POST: OrcamentoPedidos/Create
+        // POST: JogoInscricoes/Create
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,Nome,Email,Mensagem")] OrcamentoPedido orcamentoPedido)
+        public async Task<IActionResult> Create([Bind("Id,Nome,Apelido,Morada,Localidade,CC,DataNascimento")] JogoInscricao jogoInscricao)
         {
             if (ModelState.IsValid)
             {
-                _context.Add(orcamentoPedido);
+                _context.Add(jogoInscricao);
                 await _context.SaveChangesAsync();
-                return RedirectToAction(nameof(Index));
+                return RedirectToAction("Inscricao", "Home");
+
+
+
             }
-            return View(orcamentoPedido);
+            return RedirectToAction("Inscricao", "Home");
+
         }
 
-        // GET: OrcamentoPedidos/Edit/5
+        // GET: JogoInscricoes/Edit/5
         public async Task<IActionResult> Edit(int? id)
         {
             if (id == null)
@@ -67,22 +70,22 @@
                 return NotFound();
             }
 
-            var orcamentoPedido = await _context.PedidosOrcamento.FindAsync(id);
-            if (orcamentoPedido == null)
+            var jogoInscricao = await _context.InscricoesJogo.FindAsync(id);
+            if (jogoInscricao == null)
             {
                 return NotFound();
             }
-            return View(orcamentoPedido);
+            return View(jogoInscricao);
         }
 
-        // POST: OrcamentoPedidos/Edit/5
+        // POST: JogoInscricoes/Edit/5
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,Nome,Email,Mensagem")] OrcamentoPedido orcamentoPedido)
+        public async Task<IActionResult> Edit(int id, [Bind("Id,Nome,Apelido,Morada,Localidade,CC,DataNascimento")] JogoInscricao jogoInscricao)
         {
-            if (id != orcamentoPedido.Id)
+            if (id != jogoInscricao.Id)
             {
                 return NotFound();
             }
@@ -91,12 +94,12 @@
             {
                 try
                 {
-                    _context.Update(orcamentoPedido);
+                    _context.Update(jogoInscricao);
                     await _context.SaveChangesAsync();
                 }
                 catch (DbUpdateConcurrencyException)
                 {
-                    if (!OrcamentoPedidoExists(orcamentoPedido.Id))
+                    if (!JogoInscricaoExists(jogoInscricao.Id))
                     {
                         return NotFound();
                     }
@@ -107,10 +110,10 @@
                 }
                 return RedirectToAction(nameof(Index));
             }
-            return View(orcamentoPedido);
+            return View(jogoInscricao);
         }
 
-        // GET: OrcamentoPedidos/Delete/5
+        // GET: JogoInscricoes/Delete/5
         public async Task<IActionResult> Delete(int? id)
         {
             if (id == null)
@@ -118,30 +121,30 @@
                 return NotFound();
             }
 
-            var orcamentoPedido = await _context.PedidosOrcamento
+            var jogoInscricao = await _context.InscricoesJogo
                 .FirstOrDefaultAsync(m => m.Id == id);
-            if (orcamentoPedido == null)
+            if (jogoInscricao == null)
             {
                 return NotFound();
             }
 
-            return View(orcamentoPedido);
+            return View(jogoInscricao);
         }
 
-        // POST: OrcamentoPedidos/Delete/5
+        // POST: JogoInscricoes/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            var orcamentoPedido = await _context.PedidosOrcamento.FindAsync(id);
-            _context.PedidosOrcamento.Remove(orcamentoPedido);
+            var jogoInscricao = await _context.InscricoesJogo.FindAsync(id);
+            _context.InscricoesJogo.Remove(jogoInscricao);
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
 
-        private bool OrcamentoPedidoExists(int id)
+        private bool JogoInscricaoExists(int id)
         {
-            return _context.PedidosOrcamento.Any(e => e.Id == id);
+            return _context.InscricoesJogo.Any(e => e.Id == id);
         }
     }
 }

@@ -1,8 +1,6 @@
 ﻿@model IEnumerable<GlobalGames.Dados.Entidades.OrcamentoPedido>
 
-@{
-    ViewData["Title"] = "Index";
-}
+@{ ViewData["Title"] = "Index"; }
 
 
 <div class="container">
@@ -25,23 +23,26 @@
         <tbody>
             @foreach (var item in Model)
             {
-                <tr>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.Nome)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.Email)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.Mensagem)
-                    </td>
-                    <td>
-                        <a class="button_1" asp-action="Details" asp-route-id="@item.Id">Details</a>
-                        <a class="button_1" asp-action="Delete" asp-route-id="@item.Id">Delete</a>
+<tr>
+    <td>
+        @Html.DisplayFor(modelItem => item.Nome)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.Email)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.Mensagem)
+    </td>
+    <td>
+        <a class="button_1" asp-action="Details" asp-route-id="@item.Id">Details</a>
+        <a class="button_1" asp-action="Delete" asp-route-id="@item.Id">Delete</a>
 
-                    </td>
-                </tr>
-            }
+    </td>
+</tr>
+}
+
+
+
         </tbody>
     </table>
 </div>
