@@ -1,4 +1,4 @@
-﻿@model GlobalGames.Dados.Entidades.JogoInscricao
+﻿@model GlobalGames.Models.JogoInscricaoViewModel
 
 
 @{
@@ -23,11 +23,11 @@
 </section>
 
 <section id="">
-    <div class="container servicos">
+    <div class="container servicos dark">
 
         <h1 class="titulo">Inscrições para o próximo grande jogo de realidade virtual!</h1>
         <br />
-        <form asp-controller="JogoInscricoes" asp-action="Create" id="insc-form" class="orcamento">
+        <form asp-controller="JogoInscricoes" asp-action="Create" enctype="multipart/form-data" id="insc-form" class="orcamento">
             <div>
                 <label>Nome</label><br>
                 <input asp-for="Nome" type="text" placeholder="Nome" class="form-control insert" />
@@ -37,6 +37,11 @@
                 <label>Apelido</label><br>
                 <input asp-for="Apelido" type="text" placeholder="Apelido" class="form-control insert" />
                 <span asp-validation-for="Apelido" class="text-danger"></span>
+            </div>
+            <div>
+                <label>Foto/Avatar</label><br>
+                <input asp-for="ImageFile" type="file" class="form-control" />
+                <span asp-validation-for="ImageFile" class="text-danger"></span>
             </div>
             <div>
                 <label>Morada</label><br>

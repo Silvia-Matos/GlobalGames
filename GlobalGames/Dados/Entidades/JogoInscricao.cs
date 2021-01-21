@@ -14,6 +14,9 @@
 
         public string Apelido { get; set; }
 
+        [Display(Name = "Avatar")]
+        public string ImageUrl { get; set; }
+
 
         public string Morada { get; set; }
 

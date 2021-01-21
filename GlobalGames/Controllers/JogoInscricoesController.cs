@@ -1,9 +1,11 @@
 ﻿namespace GlobalGames.Controllers
 {
+    using System.IO;
     using System.Linq;
     using System.Threading.Tasks;
     using Dados;
     using Dados.Entidades;
+    using GlobalGames.Models;
     using Microsoft.AspNetCore.Mvc;
     using Microsoft.EntityFrameworkCore;
     
@@ -47,10 +49,29 @@
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,Nome,Apelido,Morada,Localidade,CC,DataNascimento")] JogoInscricao jogoInscricao)
+        public async Task<IActionResult> Create([Bind("Id,Nome,Apelido,ImageFile,Morada,Localidade,CC,DataNascimento")] JogoInscricaoViewModel view)
         {
             if (ModelState.IsValid)
             {
+                var path = string.Empty;
+
+                if(view.ImageFile != null && view.ImageFile.Length > 0) 
+                {
+                    path = Path.Combine(
+                        Directory.GetCurrentDirectory(),
+                        "wwwroot\\images\\AvatarJogoInscricao",
+                        view.ImageFile.FileName);
+
+                    using(var stream = new FileStream(path, FileMode.Create)) 
+                    {
+                        await view.ImageFile.CopyToAsync(stream);
+                    }
+
+                    path = $"~/images/AvatarJogoInscricao/{view.ImageFile.FileName}";
+                }
+
+                var jogoInscricao = this.ToJogoInscricao(view, path);
+
                 _context.Add(jogoInscricao);
                 await _context.SaveChangesAsync();
                 return RedirectToAction("Inscricao", "Home");
@@ -58,9 +79,25 @@
 
 
             }
-            return RedirectToAction("Inscricao", "Home");
+            return View(view);
 
         }
+
+        private JogoInscricao ToJogoInscricao(JogoInscricaoViewModel view, string path)
+        {
+            return new JogoInscricao
+            {
+                Id = view.Id,
+                Nome = view.Nome,
+                Apelido = view.Apelido,
+                ImageUrl = path,
+                Morada = view.Morada,
+                Localidade = view.Localidade,
+                CC = view.CC,
+                DataNascimento = view.DataNascimento,
+            };
+        }
+
 
         // GET: JogoInscricoes/Edit/5
         public async Task<IActionResult> Edit(int? id)
