@@ -25,10 +25,17 @@
                     <li><a asp-area="" asp-controller="Home" asp-action="Sobre">Sobre</a></li>
                     <li><a asp-area="" asp-controller="Home" asp-action="Servicos">Serviços</a></li>
                     <li><a asp-area="" asp-controller="Home" asp-action="Inscricao">Inscrição</a></li>
-                    @* <li><a asp-area="" asp-controller="OrcamentoPedidos" asp-action="Index">orçamentos</a></li> *@
-
+                    @if (this.User.Identity.IsAuthenticated)
+                    {
+                        <li><a asp-area="" asp-controller="Account" asp-action="Logout">Logout</a></li>
+                    }
+                    else
+                    {
+                        <li><a asp-area="" asp-controller="Account" asp-action="Login">Login</a></li>
+                    }
 
                 </ul>
+
             </nav>
         </div>
     </header>

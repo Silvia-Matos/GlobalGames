@@ -28,5 +28,8 @@
 
         [Display(Name = "Data de Nascimento")]
         public DateTime DataNascimento { get; set; }
+
+        public string UserAdmin { get; set; }
+
     }
 }

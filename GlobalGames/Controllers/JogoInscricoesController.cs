@@ -5,17 +5,20 @@
     using System.Threading.Tasks;
     using Dados;
     using Dados.Entidades;
-    using GlobalGames.Models;
+    using Helpers;
+    using Models;
     using Microsoft.AspNetCore.Mvc;
     using Microsoft.EntityFrameworkCore;
     
     public class JogoInscricoesController : Controller
     {
         private readonly DataContext _context;
+        private readonly IUserAdminHelper userAdminHelper;
 
-        public JogoInscricoesController(DataContext context)
+        public JogoInscricoesController(DataContext context, IUserAdminHelper userAdminHelper)
         {
             _context = context;
+            this.userAdminHelper = userAdminHelper;
         }
 
         // GET: JogoInscricoes
@@ -69,6 +72,7 @@
 
                     path = $"~/images/AvatarJogoInscricao/{view.ImageFile.FileName}";
                 }
+                
 
                 var jogoInscricao = this.ToJogoInscricao(view, path);
 
@@ -79,7 +83,7 @@
 
 
             }
-            return View(view);
+            return RedirectToAction("Inscricao", "Home");
 
         }
 
@@ -131,6 +135,7 @@
             {
                 try
                 {
+                    jogoInscricao.UserAdmin = await this.userAdminHelper.GetUserByEmailAsync("administrador@emailteste.pt");
                     _context.Update(jogoInscricao);
                     await _context.SaveChangesAsync();
                 }
