@@ -48,11 +48,31 @@
 
 
             if (!this.context.InscricoesJogo.Any())
-            {
-
+            {   
+                this.AddInscricoes("Beto", "Bento", "Rua DDD", "localidade b", "10120202");
+                this.AddInscricoes("Carla", "Costa", "Rua CCC", "localidade c", "84539754");
+                this.AddInscricoes("Fatima", "Farias", "Rua FFF", "localidade f", "25404537");
+                this.AddInscricoes("Guilherme", "Grilo", "Rua GGG", "localidade g", "92549675");
+                this.AddInscricoes("Hugo", "Henriques", "Rua HHH", "localidade h", "3549664");
                 await this.context.SaveChangesAsync();
 
             }
+       
+        }
+
+        private void AddInscricoes(string nome, string apelido, string morada, string localidade, string cc)
+        {
+            this.context.InscricoesJogo.Add(new JogoInscricao
+            {
+                Nome = nome,
+                Apelido = apelido,
+                Morada = morada,
+                Localidade = localidade,
+                CC = cc,
+
+            });
+
+
         }
 
     }
